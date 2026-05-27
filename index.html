@@ -4,14 +4,11 @@
   <meta charset="utf-8">
   <title>05 — Video Chromakey</title>
 
-  <!-- AR Libraries -->
   <script src="https://cdn.8thwall.com/web/aframe/8frame-1.3.0.min.js"></script>
   <script src="https://cdn.8thwall.com/web/xrextras/xrextras.js"></script>
 
-  <!-- 8th Wall Engine -->
   <script async src="./engine/xr.js" data-preload-chunks="slam"></script>
 
-  <!-- Image Target Configuration -->
   <script>
     const onxrloaded = () => {
       XR8.XrController.configure({
@@ -21,8 +18,8 @@
           "imagePath": "./assets/nikidesaintphalle2.jpg",
           "properties": {
             "left": 0, "top": 0,
-            "width": 830, "height": 830,
-            "originalWidth": 830, "originalHeight": 830,
+            "width": 530, "height": 830,
+            "originalWidth": 430, "originalHeight": 830,
             "isRotated": false
           }
         }]
@@ -31,7 +28,6 @@
     window.XR8 ? onxrloaded() : window.addEventListener('xrloaded', onxrloaded);
   </script>
 
-  <!-- Component to play/pause video on image target detection -->
   <script>
     AFRAME.registerComponent('video-playback-on-scan', {
       schema: {
@@ -43,7 +39,6 @@
 
         this.video.pause();
 
-        // xrimagefound/xrimagelost fire on <a-scene>, not on the target element
         this.onFound = () => { this.video.play(); };
         this.onLost = () => { this.video.pause(); };
 
@@ -58,13 +53,12 @@
     });
   </script>
 
-  <!-- Chromakey Shader -->
   <script>
     AFRAME.registerShader('chromakey', {
       schema: {
         src: {type: 'map'},
         color: {type: 'color', default: '#00FF00'},
-        chroma: {type: 'bool', default: true},
+        chroma: {type: 'boolean', default: false}, /* Changé 'bool' en 'boolean' + false par défaut */
         transparent: {default: true}
       },
 
@@ -134,7 +128,7 @@
 
     <xrextras-named-image-target name="my-poster" video-playback-on-scan="video: #vid">
       <a-entity
-        geometry="primitive: plane; width: 2; height: 1.5"
+        geometry="primitive: plane; width:0.8; height: 1.1"
         material="shader: chromakey; src: #vid; chroma: falses; color: #00FF00;"
         position="0 0.0 0">
       </a-entity>
