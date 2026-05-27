@@ -126,7 +126,7 @@
     xrweb="disableWorldTracking: true">
 
     <a-assets>
-      <video id="vid" src="../assets/mask_green_sil.mp4"
+      <video id="vid" src="../assets/nikidesaintphalle3.mp4"
              loop muted playsinline crossorigin="anonymous"></video>
     </a-assets>
 
@@ -135,7 +135,7 @@
     <xrextras-named-image-target name="my-poster" video-playback-on-scan="video: #vid">
       <a-entity
         geometry="primitive: plane; width: 2; height: 1.5"
-        material="shader: chromakey; src: #vid; chroma: true; color: #00FF00;"
+        material="shader: chromakey; src: #vid; chroma: falses; color: #00FF00;"
         position="0 0.0 0">
       </a-entity>
     </xrextras-named-image-target>
